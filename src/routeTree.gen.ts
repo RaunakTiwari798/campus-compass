@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ReviewsRouteImport } from './routes/reviews'
 import { Route as MentorsRouteImport } from './routes/mentors'
+import { Route as FutureCollegesRouteImport } from './routes/future-colleges'
 import { Route as CompareRouteImport } from './routes/compare'
 import { Route as CollegesRouteImport } from './routes/colleges'
 import { Route as ChatRouteImport } from './routes/chat'
@@ -24,6 +25,11 @@ const ReviewsRoute = ReviewsRouteImport.update({
 const MentorsRoute = MentorsRouteImport.update({
   id: '/mentors',
   path: '/mentors',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FutureCollegesRoute = FutureCollegesRouteImport.update({
+  id: '/future-colleges',
+  path: '/future-colleges',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CompareRoute = CompareRouteImport.update({
@@ -52,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/chat': typeof ChatRoute
   '/colleges': typeof CollegesRoute
   '/compare': typeof CompareRoute
+  '/future-colleges': typeof FutureCollegesRoute
   '/mentors': typeof MentorsRoute
   '/reviews': typeof ReviewsRoute
 }
@@ -60,6 +67,7 @@ export interface FileRoutesByTo {
   '/chat': typeof ChatRoute
   '/colleges': typeof CollegesRoute
   '/compare': typeof CompareRoute
+  '/future-colleges': typeof FutureCollegesRoute
   '/mentors': typeof MentorsRoute
   '/reviews': typeof ReviewsRoute
 }
@@ -69,20 +77,36 @@ export interface FileRoutesById {
   '/chat': typeof ChatRoute
   '/colleges': typeof CollegesRoute
   '/compare': typeof CompareRoute
+  '/future-colleges': typeof FutureCollegesRoute
   '/mentors': typeof MentorsRoute
   '/reviews': typeof ReviewsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/chat' | '/colleges' | '/compare' | '/mentors' | '/reviews'
+  fullPaths:
+    | '/'
+    | '/chat'
+    | '/colleges'
+    | '/compare'
+    | '/future-colleges'
+    | '/mentors'
+    | '/reviews'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/chat' | '/colleges' | '/compare' | '/mentors' | '/reviews'
+  to:
+    | '/'
+    | '/chat'
+    | '/colleges'
+    | '/compare'
+    | '/future-colleges'
+    | '/mentors'
+    | '/reviews'
   id:
     | '__root__'
     | '/'
     | '/chat'
     | '/colleges'
     | '/compare'
+    | '/future-colleges'
     | '/mentors'
     | '/reviews'
   fileRoutesById: FileRoutesById
@@ -92,6 +116,7 @@ export interface RootRouteChildren {
   ChatRoute: typeof ChatRoute
   CollegesRoute: typeof CollegesRoute
   CompareRoute: typeof CompareRoute
+  FutureCollegesRoute: typeof FutureCollegesRoute
   MentorsRoute: typeof MentorsRoute
   ReviewsRoute: typeof ReviewsRoute
 }
@@ -110,6 +135,13 @@ declare module '@tanstack/react-router' {
       path: '/mentors'
       fullPath: '/mentors'
       preLoaderRoute: typeof MentorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/future-colleges': {
+      id: '/future-colleges'
+      path: '/future-colleges'
+      fullPath: '/future-colleges'
+      preLoaderRoute: typeof FutureCollegesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/compare': {
@@ -148,6 +180,7 @@ const rootRouteChildren: RootRouteChildren = {
   ChatRoute: ChatRoute,
   CollegesRoute: CollegesRoute,
   CompareRoute: CompareRoute,
+  FutureCollegesRoute: FutureCollegesRoute,
   MentorsRoute: MentorsRoute,
   ReviewsRoute: ReviewsRoute,
 }
