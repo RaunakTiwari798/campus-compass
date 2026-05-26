@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ReviewsRouteImport } from './routes/reviews'
 import { Route as MentorsRouteImport } from './routes/mentors'
 import { Route as FutureCollegesRouteImport } from './routes/future-colleges'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as CompareRouteImport } from './routes/compare'
 import { Route as CollegesRouteImport } from './routes/colleges'
 import { Route as ChatRouteImport } from './routes/chat'
@@ -30,6 +31,11 @@ const MentorsRoute = MentorsRouteImport.update({
 const FutureCollegesRoute = FutureCollegesRouteImport.update({
   id: '/future-colleges',
   path: '/future-colleges',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CompareRoute = CompareRouteImport.update({
@@ -58,6 +64,7 @@ export interface FileRoutesByFullPath {
   '/chat': typeof ChatRoute
   '/colleges': typeof CollegesRoute
   '/compare': typeof CompareRoute
+  '/dashboard': typeof DashboardRoute
   '/future-colleges': typeof FutureCollegesRoute
   '/mentors': typeof MentorsRoute
   '/reviews': typeof ReviewsRoute
@@ -67,6 +74,7 @@ export interface FileRoutesByTo {
   '/chat': typeof ChatRoute
   '/colleges': typeof CollegesRoute
   '/compare': typeof CompareRoute
+  '/dashboard': typeof DashboardRoute
   '/future-colleges': typeof FutureCollegesRoute
   '/mentors': typeof MentorsRoute
   '/reviews': typeof ReviewsRoute
@@ -77,6 +85,7 @@ export interface FileRoutesById {
   '/chat': typeof ChatRoute
   '/colleges': typeof CollegesRoute
   '/compare': typeof CompareRoute
+  '/dashboard': typeof DashboardRoute
   '/future-colleges': typeof FutureCollegesRoute
   '/mentors': typeof MentorsRoute
   '/reviews': typeof ReviewsRoute
@@ -88,6 +97,7 @@ export interface FileRouteTypes {
     | '/chat'
     | '/colleges'
     | '/compare'
+    | '/dashboard'
     | '/future-colleges'
     | '/mentors'
     | '/reviews'
@@ -97,6 +107,7 @@ export interface FileRouteTypes {
     | '/chat'
     | '/colleges'
     | '/compare'
+    | '/dashboard'
     | '/future-colleges'
     | '/mentors'
     | '/reviews'
@@ -106,6 +117,7 @@ export interface FileRouteTypes {
     | '/chat'
     | '/colleges'
     | '/compare'
+    | '/dashboard'
     | '/future-colleges'
     | '/mentors'
     | '/reviews'
@@ -116,6 +128,7 @@ export interface RootRouteChildren {
   ChatRoute: typeof ChatRoute
   CollegesRoute: typeof CollegesRoute
   CompareRoute: typeof CompareRoute
+  DashboardRoute: typeof DashboardRoute
   FutureCollegesRoute: typeof FutureCollegesRoute
   MentorsRoute: typeof MentorsRoute
   ReviewsRoute: typeof ReviewsRoute
@@ -142,6 +155,13 @@ declare module '@tanstack/react-router' {
       path: '/future-colleges'
       fullPath: '/future-colleges'
       preLoaderRoute: typeof FutureCollegesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/compare': {
@@ -180,6 +200,7 @@ const rootRouteChildren: RootRouteChildren = {
   ChatRoute: ChatRoute,
   CollegesRoute: CollegesRoute,
   CompareRoute: CompareRoute,
+  DashboardRoute: DashboardRoute,
   FutureCollegesRoute: FutureCollegesRoute,
   MentorsRoute: MentorsRoute,
   ReviewsRoute: ReviewsRoute,
