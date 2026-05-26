@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ReviewsRouteImport } from './routes/reviews'
+import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as MentorsRouteImport } from './routes/mentors'
 import { Route as FutureCollegesRouteImport } from './routes/future-colleges'
 import { Route as DashboardRouteImport } from './routes/dashboard'
@@ -21,6 +22,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const ReviewsRoute = ReviewsRouteImport.update({
   id: '/reviews',
   path: '/reviews',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MentorsRoute = MentorsRouteImport.update({
@@ -67,6 +73,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute
   '/future-colleges': typeof FutureCollegesRoute
   '/mentors': typeof MentorsRoute
+  '/pricing': typeof PricingRoute
   '/reviews': typeof ReviewsRoute
 }
 export interface FileRoutesByTo {
@@ -77,6 +84,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardRoute
   '/future-colleges': typeof FutureCollegesRoute
   '/mentors': typeof MentorsRoute
+  '/pricing': typeof PricingRoute
   '/reviews': typeof ReviewsRoute
 }
 export interface FileRoutesById {
@@ -88,6 +96,7 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/future-colleges': typeof FutureCollegesRoute
   '/mentors': typeof MentorsRoute
+  '/pricing': typeof PricingRoute
   '/reviews': typeof ReviewsRoute
 }
 export interface FileRouteTypes {
@@ -100,6 +109,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/future-colleges'
     | '/mentors'
+    | '/pricing'
     | '/reviews'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -110,6 +120,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/future-colleges'
     | '/mentors'
+    | '/pricing'
     | '/reviews'
   id:
     | '__root__'
@@ -120,6 +131,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/future-colleges'
     | '/mentors'
+    | '/pricing'
     | '/reviews'
   fileRoutesById: FileRoutesById
 }
@@ -131,6 +143,7 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   FutureCollegesRoute: typeof FutureCollegesRoute
   MentorsRoute: typeof MentorsRoute
+  PricingRoute: typeof PricingRoute
   ReviewsRoute: typeof ReviewsRoute
 }
 
@@ -141,6 +154,13 @@ declare module '@tanstack/react-router' {
       path: '/reviews'
       fullPath: '/reviews'
       preLoaderRoute: typeof ReviewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/mentors': {
@@ -203,6 +223,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   FutureCollegesRoute: FutureCollegesRoute,
   MentorsRoute: MentorsRoute,
+  PricingRoute: PricingRoute,
   ReviewsRoute: ReviewsRoute,
 }
 export const routeTree = rootRouteImport
